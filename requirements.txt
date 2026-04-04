@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+streamlit
+requests
+pillow
+numpy
+pandas
+opencv-python
+mediapipe
+torch
+torchvision
+timm
+transformers
+scikit-learn
+xgboost
+python-multipart
