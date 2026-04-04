@@ -38,3 +38,66 @@ ReelGuard addresses this problem by building an **end-to-end detection pipeline*
 ---
 
 ## 🏗️ System Architecture
+
+User Input (Image + Caption)
+│
+▼
+FastAPI Backend
+│
+├── Image Artifact Model
+├── Face Hyperrealism Module
+├── Text Detection Model
+│
+▼
+Fusion Layer
+│
+▼
+Explanation Generator
+│
+▼
+JSON Response → UI Display
+
+
+---
+
+## 🔬 Detection Strategy
+
+### 1. Image Artifact Detection
+Detects:
+- unnatural textures
+- repeated patterns
+- diffusion/GAN artifacts
+
+### 2. Face Hyperrealism Analysis (Key Innovation)
+Inspired by research on AI-generated faces:
+
+- overly symmetric faces
+- unusually smooth skin texture
+- statistically “average” facial structure
+
+> AI faces can appear **more real than real humans** — this module captures that.
+
+### 3. Text Analysis
+Detects:
+- templated language
+- repetitive phrasing
+- generic promotional tone
+
+---
+
+## 📊 Example Output
+
+```json
+{
+  "ai_probability": 81.3,
+  "human_probability": 18.7,
+  "risk_label": "Likely AI-generated",
+  "artifact_score": 0.78,
+  "hyperrealism_score": 0.69,
+  "text_score": 0.84,
+  "reasons": [
+    "Facial structure appears unusually symmetric",
+    "Skin texture appears smoother than typical camera-captured images",
+    "Caption language resembles generated promotional phrasing"
+  ]
+}
