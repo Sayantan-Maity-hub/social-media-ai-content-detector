@@ -46,8 +46,24 @@ def analyze_post(
     text_score = 0.5
 
     fused_output = fuse_scores(
-        artifact_score = aft
+        artifact_score = artifact_score,
+        hyperrealism_score = hyperrealism_score,
+        text_score = text_score,
     )
+
+    reasons = generate_reasons(
+        artifact_score = artifact_score, 
+        hyperrealism_score = hyperrealism_score,
+        text_score = text_score,
+    )
+
+    return {
+        **fused_output,
+        "reasons": reasons,
+        "caption_length": len(caption),
+        "message": "Analysis completed successfully.",
+
+    }
 
     
 
