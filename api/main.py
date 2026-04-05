@@ -30,6 +30,24 @@ def validate_image(upload_file: UploadFile) -> Image.Image:  # validate uploaded
         return image
     except Exception as exc:
         raise HTTPException(status_code = 400, details = "Invalid image file.") from exc
-    
+
+@app.post("/analyze-post")
+def analyze_post(
+    image: UploadFile = File(...),
+    caption: str = Form(...),
+): # Accept an image and caption runs dummy inference for now, fuses scores, and returns explainations.
+    if not caption.strip():
+        raise HTTPException(status_code = 400, details = "Caption cannot be empty.")
+        
+    _ = validate_image(image)
+    # Dummy scores for demonstration purposes
+    artifact_score = 0.6
+    hyperrealism_score = 0.4
+    text_score = 0.5
+
+    fused_output = fuse_scores(
+        artifact_score = aft
+    )
+
     
 
