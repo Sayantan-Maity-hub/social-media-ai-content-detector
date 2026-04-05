@@ -20,3 +20,16 @@ app.add_middleware(
 def health_check():
     return {"status": "ok"}
 
+def validate_image(upload_file: UploadFile) -> Image.Image:  # validate uploaded image and return a PIL Image object.
+    if not upload_file.content_type or not upload_file.content_type.startwith("image/"):
+        raise HTTPException(status_code = 400, details = "Uploaded file must be and image.")
+    
+    try:
+        image_bytes = upload_file.file.read()
+        image = Image.open(BytesIO(image_bytes)).covert("RGB")
+        return image
+    except Exception as exc:
+        raise HTTPException(status_code = 400, details = "Invalid image file.") from exc
+    
+    
+
