@@ -1,61 +1,103 @@
-# AI Content Detector
+# ReelGuard — Real-Time AI Content Detection System
 
-A starter project for classifying images as **AI-generated** or **real**.
+ReelGuard is a multimodal AI-powered system designed to analyze social media content and estimate the likelihood that a post is **AI-generated vs human-created**.
 
-## What this project does
-- Loads image datasets from folder structure
-- Trains a simple CNN baseline in PyTorch
-- Evaluates validation accuracy
-- Saves trained model weights
-- Runs prediction on a single image
-- Provides a small Flask app for local testing
+The system processes **images and captions**, combines multiple signals (visual artifacts, hyperrealistic facial patterns, and text features), and returns a **probabilistic authenticity score with human-readable explanations**.
 
-# Setup
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-#Linux/macOS
-source .venv/bin/activate
-
-pip install -r requirements.txt
-
-# Train
-python train.py
-
-# Predict
-python predict.py --image sample_images/test.jpg --weights models/best_model.pt
-
-# Run local web app
-python app.py
-
-# Notes 
-This is a baseline starter.Better results usually reqire:
-stronger datasets
-better augmentation
-transfer learning
-metadata analysis
-calibration and threshhold tuning
 ---
-## requirements.txt
 
-```text
-torch 
-torchvision
-pillow
-numpy
-scikit-learn
-matplotlib
-flask 
-```
-# 
+## 🚀 Overview
+
+With the rapid growth of AI-generated content on social platforms, it has become increasingly difficult for users to distinguish between real and synthetic media.
+
+ReelGuard addresses this problem by building an **end-to-end detection pipeline** that:
+
+- Accepts an image and caption as input
+- Analyzes visual patterns using a CNN-based model
+- Detects hyperrealistic facial characteristics (symmetry, smoothness, averageness)
+- Evaluates caption text for AI-like linguistic patterns
+- Combines all signals using a fusion model
+- Returns:
+  - AI probability score
+  - Risk label
+  - Explanation of detected signals
+
+---
+
+## 🧠 Key Features
+
+- Multimodal detection (image + text)
+- Artifact-based image analysis (CNN)
+- Hyperrealism-based face analysis (symmetry, texture, proportions)
+- Text classification using NLP models
+- Fusion-based decision system
+- Explainable outputs (reason generation)
+- FastAPI backend for real-time inference
+- Streamlit frontend for interactive testing
+
+---
+
+## 🏗️ System Architecture
+
+User Input (Image + Caption)
+│
+▼
+FastAPI Backend
+│
+├── Image Artifact Model
+├── Face Hyperrealism Module
+├── Text Detection Model
+│
+▼
+Fusion Layer
+│
+▼
+Explanation Generator
+│
+▼
+JSON Response → UI Display
 
 
-.gitignore
+---
 
-_pycache/
-*.pyc
-.venv/
-models/*.pt
-models/*.pth
-.Ds_store
-Thumbs.db
+## 🔬 Detection Strategy
+
+### 1. Image Artifact Detection
+Detects:
+- unnatural textures
+- repeated patterns
+- diffusion/GAN artifacts
+
+### 2. Face Hyperrealism Analysis (Key Innovation)
+Inspired by research on AI-generated faces:
+
+- overly symmetric faces
+- unusually smooth skin texture
+- statistically “average” facial structure
+
+> AI faces can appear **more real than real humans** — this module captures that.
+
+### 3. Text Analysis
+Detects:
+- templated language
+- repetitive phrasing
+- generic promotional tone
+
+---
+
+## 📊 Example Output
+
+```json
+{
+  "ai_probability": 81.3,
+  "human_probability": 18.7,
+  "risk_label": "Likely AI-generated",
+  "artifact_score": 0.78,
+  "hyperrealism_score": 0.69,
+  "text_score": 0.84,
+  "reasons": [
+    "Facial structure appears unusually symmetric",
+    "Skin texture appears smoother than typical camera-captured images",
+    "Caption language resembles generated promotional phrasing"
+  ]
+}
