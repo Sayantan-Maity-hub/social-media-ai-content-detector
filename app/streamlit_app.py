@@ -47,4 +47,14 @@ if analyze_button:
                     st.write(f"** Artifact Score:** {result['artifact_score']:.2f}")
                     st.write(f"** Hyperrealism Score:** {result['hyperrealism_score']:.2f}")
                     st.write(f"** Text Score:** {result['text_score']:.2f}")
-                    
+                    st.markdown("### Reasons")
+                    st.write(f"Caption Length: {result['caption_length']}")
+                    for reason in result['reasons']:
+                        st.write(f"- {reason}")
+                    st.markdown("### Metadata")
+                    st.write(f"Caption: Length: {result['caption_length']}")
+                    st.write(result['message'])
+            else:
+                st.error(f"API Error: {response.text}")
+
+
