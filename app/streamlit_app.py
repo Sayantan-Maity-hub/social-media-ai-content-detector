@@ -31,4 +31,11 @@ if analyze_button:
                 "caption": caption
             }
             response = requests.post(API_URL, files=files, data=data, timeout=60)
-            
+            if response.status_code == 200:
+                result = response.json()
+
+                with col1:
+                    st.markdown("### Uploaded Image")
+                    image = Image.open(uploaded_image)
+                    st.image(image, use_container_width=True)
+                    
