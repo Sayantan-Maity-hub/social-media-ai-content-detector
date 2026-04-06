@@ -56,5 +56,10 @@ if analyze_button:
                     st.write(result['message'])
             else:
                 st.error(f"API Error: {response.text}")
+        except requests.exceptions.ConnectionError:
+            st.error("Could not connect to the API. Please ensure the backend server is running.")
+        except Exception as exc:
+            st.error(f"Unexpected error: {exc}")
+            
 
 
