@@ -13,4 +13,6 @@ with col1:
 
     analyze_button  = st.button("Analyze Post")
 
-
+with col2:
+    st.markdown("### Results")
+    result_placeholder = st.empty()
