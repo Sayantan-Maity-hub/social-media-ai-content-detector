@@ -38,4 +38,13 @@ if analyze_button:
                     st.markdown("### Uploaded Image")
                     image = Image.open(uploaded_image)
                     st.image(image, use_container_width=True)
+
+                with col2:
+                    st.success("Analysis completed")
+                    st.metric("AI Probability", f"{result['ai_probability']:.2f}%")
+                    st.metric("Human Probability", f"{result['human_probability']:.2f}%")
+                    st.write(f"** Risk Label:** {result['risk_label']}")
+                    st.write(f"** Artifact Score:** {result['artifact_score']:.2f}")
+                    st.write(f"** Hyperrealism Score:** {result['hyperrealism_score']:.2f}")
+                    st.write(f"** Text Score:** {result['text_score']:.2f}")
                     
