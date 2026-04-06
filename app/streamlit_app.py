@@ -16,3 +16,19 @@ with col1:
 with col2:
     st.markdown("### Results")
     result_placeholder = st.empty()
+if analyze_button:
+    if uploaded_image is None:
+        st.error("please upload an image")
+    elif not caption.strip():
+        st.error("please enter a caption")
+    else:
+        try:
+            files = {
+                "image": (uploaded_image.name, uploaded_image.getvalue(), uploaded_image.type)
+
+            }
+            data = {
+                "caption": caption
+            }
+            response = requests.post(API_URL, files=files, data=data, timeout=60)
+            
